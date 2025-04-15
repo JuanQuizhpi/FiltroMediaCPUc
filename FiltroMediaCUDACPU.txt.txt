@@ -1,0 +1,76 @@
+#include "cuda_runtime.h"
+#include "device_launch_parameters.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdint.h>
+#include <time.h>
+#include "book.h"
+
+//Bibliotecas para el manejo de imagenes
+#define STB_IMAGE_IMPLEMENTATION
+#define STB_IMAGE_WRITE_IMPLEMENTATION
+#include "stb_image.h"
+#include "stb_image_write.h"
+
+
+void aplicarFiltroMedia(uint8_t* input, uint8_t* output, int width, int height, int maskSize) {
+    int radius = maskSize / 2;//Radio de la mascara
+    int windowSize = maskSize * maskSize;//Total de pixeles de la mascara
+
+    // Inicializar toda la imagen de salida con pixeles negros (0)
+    memset(output, 0, width * height * sizeof(uint8_t));
+
+    //Procesamiento de pixeles centrales evitando los bordes de la imagen
+    for (int y = radius; y < height - radius; ++y) {
+        for (int x = radius; x < width - radius; ++x) {
+            int sum = 0;//Acumulador para la suma de intensidades
+
+            //Recorre la mascara alrededor de un pixel x,y
+            for (int dy = -radius; dy <= radius; ++dy) {
+                for (int dx = -radius; dx <= radius; ++dx) {
+                    sum += input[(y + dy) * width + (x + dx)];
+                }
+            }
+
+            //Se calcula el promedio y se lo asigna al pixel la imagen de salida
+            output[y * width + x] = (uint8_t)(sum / windowSize);
+        }
+    }
+}
+
+int main() {
+
+    //Rutas de entrada y salida de la imagen a aplicar el filtro
+    const char* inputPath = "imagen1.pgm";
+    const char* outputPath = "MediaCPUCUDAC_61x61.jpg";
+    int width, height, channels;
+    int maskSize = 61; // Tamaño de la mascara
+
+    // Cargamos la imagen y verificamos si existe
+    uint8_t* inputImage = stbi_load(inputPath, &width, &height, &channels, 1);
+    if (!inputImage) {
+        printf("Error cargando la imagen.\n");
+        return 1;
+    }
+
+    //Reservamos espacio de memoria para la imagen resultante
+    uint8_t* outputImage = (uint8_t*)malloc(width * height * sizeof(uint8_t));
+
+    // Medimos el tiempo de ejecución
+    clock_t start = clock();
+    aplicarFiltroMedia(inputImage, outputImage, width, height, maskSize);
+    clock_t end = clock();
+
+    double elapsedTime = ((double)(end - start)) / CLOCKS_PER_SEC * 1000.0;
+    printf("Tiempo CPU: %.2f ms\n", elapsedTime);
+
+    // Guardamos la imagen resultante
+    stbi_write_jpg(outputPath, width, height, 1, outputImage, 100);
+    printf("Imagen guardada: %s\n", outputPath);
+
+    // Liberamos los recursos reservados para la imagen
+    stbi_image_free(inputImage);
+    free(outputImage);
+
+    return 0;
+}
