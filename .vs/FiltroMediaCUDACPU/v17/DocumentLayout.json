@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\juanf\\OneDrive\\Desktop\\Periodo66\\Computaci\u00F3nParalela\\Unidad1\\DeberCUDAC\\CUDA\\FiltroMediaCUDACPU\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{AAF32C96-01BF-C21C-FAD0-A62E8FFFBF51}|FiltroMediaCUDACPU.vcxproj|C:\\Users\\juanf\\OneDrive\\Desktop\\Periodo66\\Computaci\u00F3nParalela\\Unidad1\\DeberCUDAC\\CUDA\\FiltroMediaCUDACPU\\kernel.cu||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{AAF32C96-01BF-C21C-FAD0-A62E8FFFBF51}|FiltroMediaCUDACPU.vcxproj|solutionrelative:kernel.cu||{8B382828-6202-11D1-8870-0000F87579D2}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "kernel.cu",
+              "DocumentMoniker": "C:\\Users\\juanf\\OneDrive\\Desktop\\Periodo66\\Computaci\u00F3nParalela\\Unidad1\\DeberCUDAC\\CUDA\\FiltroMediaCUDACPU\\kernel.cu",
+              "RelativeDocumentMoniker": "kernel.cu",
+              "ToolTip": "C:\\Users\\juanf\\OneDrive\\Desktop\\Periodo66\\Computaci\u00F3nParalela\\Unidad1\\DeberCUDAC\\CUDA\\FiltroMediaCUDACPU\\kernel.cu",
+              "RelativeToolTip": "kernel.cu",
+              "ViewState": "AgIAACEAAAAAAAAAAAAAAB4AAAA+AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-04-11T23:33:15.962Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
